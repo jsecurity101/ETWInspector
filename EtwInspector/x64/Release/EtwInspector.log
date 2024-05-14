@@ -1,0 +1,10 @@
+﻿  EtwInspector.cpp
+  helperFunctions.cpp
+C:\Users\johns\Documents\GitHub\ETWInspector\EtwInspector\helperFunctions.cpp(29,152): warning C4267: 'initializing': conversion from 'size_t' to 'ULONG', possible loss of data
+C:\Users\johns\Documents\GitHub\ETWInspector\EtwInspector\helperFunctions.cpp(47,112): warning C4267: '=': conversion from 'size_t' to 'ULONG', possible loss of data
+C:\Users\johns\Documents\GitHub\ETWInspector\EtwInspector\helperFunctions.cpp(291,34): warning C4390: ';': empty controlled statement found; is this the intent?
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 560 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  EtwInspector.vcxproj -> C:\Users\johns\Documents\GitHub\ETWInspector\EtwInspector\x64\Release\EtwInspector.exe
