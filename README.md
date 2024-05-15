@@ -146,3 +146,7 @@ EtwInspector.exe Capture Microsoft-Windows-DotNETRuntime MyTrace 0x8
 Type 'exit' to stop tracing and exit.
 ```
 
+# To Do
+- [ ] Add support the enumeration of active trace sessions
+- [ ] Add support for enumeration of providers based off of event values
+- [ ] Add support to return the ETW provider's binary
