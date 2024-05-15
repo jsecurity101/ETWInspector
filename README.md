@@ -147,6 +147,6 @@ Type 'exit' to stop tracing and exit.
 ```
 
 # To Do
-- [ ] Add support the enumeration of active trace sessions
+- [ ] Add support for the enumeration of active trace sessions
 - [ ] Add support for enumeration of providers based off of event values
 - [ ] Add support to return the ETW provider's binary
