@@ -18,12 +18,12 @@
     <ClCompile Include="EtwInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="helperFunctions.cpp">
+    <ClCompile Include="workerFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="helperFunctions.h">
+    <ClInclude Include="workerFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
