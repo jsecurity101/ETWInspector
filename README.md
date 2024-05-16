@@ -18,6 +18,7 @@ Arguments:
                                - If <Capture>: Creates an event trace session off of the providers returned during enumeration.
                             -If <Capture>: TraceName specifies the name of the trace session created.
   [Keywords (Hex)]          - Optional. Supported only if <Capture> is specified. Holds the keywords for capture.
+```
 
 ### Enumeration
 Enumerates both MOF & Manifest providers and prints the output to screen. 
