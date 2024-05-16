@@ -10,16 +10,23 @@ int wmain(
         return 1;
     }
 
+    // for loop that takes the number of arguments and changes them to wstring in lowercase
+    for (int i = 1; i < argc; i++) {
+        std::wstring arg = argv[i];
+        std::transform(arg.begin(), arg.end(), arg.begin(), ::towlower);
+        argv[i] = _wcsdup(arg.c_str());
+    }
+
     NTSTATUS status = -1;
     std::wstring action = argv[1];
-    std::wstring option = argv[2];
     std::wstring providerName, traceName, arg4;
     ULONGLONG keywords = 0;
     DWORD extendedDataValue = 0;
     std::vector<std::wstring> providerGuids;
 
-    if (action == L"Enum")
+    if (action == L"enum")
     {
+        std::wstring option = argv[2];
         if (argc >= 4)
         {
             providerName = argv[3];
@@ -27,7 +34,7 @@ int wmain(
         if (argc == 5)
         {
             arg4 = argv[4];
-            if (arg4 == L"ExtendedData")
+            if (arg4 == L"extendeddata")
             {
                 extendedDataValue = 1;
             }
@@ -42,7 +49,7 @@ int wmain(
             std::cout << "[!] Error in Enumerating Providers" << std::endl;
         }
 
-        if (arg4 == L"Capture")
+        if (arg4 == L"capture")
         {
             keywords = 0xFFFFFFFFFFFFFFFF;
             std::wstring etlFileName = L"MyTraceFile.etl";
@@ -60,7 +67,7 @@ int wmain(
         }
 
     }
-    else if (action == L"Capture")
+    else if (action == L"capture")
     {
         if (argc < 5) {
             PrintUsage();
@@ -75,7 +82,7 @@ int wmain(
         wprintf(L"Capturing trace for provider %s with trace name %s and keywords 0x%llX\n", providerName.c_str(), traceName.c_str(), keywords);
 
         status = EnumerateProviders(
-            L"Capture", 
+            L"capture", 
             providerName, 
             extendedDataValue, 
             providerGuids

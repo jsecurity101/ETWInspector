@@ -5,6 +5,9 @@
 #include <sstream>
 #include <vector>
 #include <iostream>
+#include <algorithm>
+#include <cwchar> 
+#include <locale>
 
 #pragma comment(lib, "tdh.lib")
 using namespace std;
@@ -22,12 +25,12 @@ NTSTATUS EnumerateProviders(
 );
 
 NTSTATUS GetResourceFile(
-	_In_ std::wstring providerGuid,
-	_Out_ std::wstring& resourceFileName
+	_In_ std::wstring ProviderGuid,
+	_Out_ std::wstring& ResourceFileName
 );
 
 NTSTATUS EnumerateProviderEvents(
-	_In_ std::wstring provider
+	_In_ std::wstring Provider
 );
 
 NTSTATUS GetEventMetadata(
@@ -36,10 +39,10 @@ NTSTATUS GetEventMetadata(
 
 VOID PrintInformation(
 	_In_ DWORD Type,
-	_In_ std::wstring providerName,
-	_In_ std::wstring providerGuid,
-	_In_ std::wstring source,
-	_In_ std::wstring resourceFileName
+	_In_ std::wstring ProviderName,
+	_In_ std::wstring ProviderGuid,
+	_In_ std::wstring Source,
+	_In_ std::wstring ResourceFileName
 );
 
 NTSTATUS CaptureProviders(

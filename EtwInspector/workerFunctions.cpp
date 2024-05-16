@@ -6,10 +6,26 @@
 VOID PrintUsage(
 )
 {
-    wprintf(L"Usage: EtwInspector.exe <Enum|Capture> <Options> [ProviderName] [TraceName|Keywords|ExtendedData|Capture]\n");
-    wprintf(L"Examples:\n");
-    wprintf(L"  EtwInspector.exe Enum <All|Manifest|MOF> [ProviderName] [ExtendedData|Capture]\n");
-    wprintf(L"  EtwInspector.exe Capture ProviderName TraceName Keywords (hex)\n");
+    wprintf(L"Usage: EtwInspector.exe <Enum|Capture> <Options> [ProviderName|GUID] [TraceName|ExtendedData|Capture] [Keywords]\n\n"
+        L"Arguments:\n"
+        L"  <Enum|Capture>            Required. Specifies the mode of operation.\n"
+        L"                            - Enum: Enumerates providers.\n"
+        L"                            - Capture: Capture specified providers.\n"
+        L"  <Options>                 Required when specifying Enum. Can be Manifest, MOF, or All.\n"
+        L"  [ProviderName|GUID]       Optional for Enum. Required for Capture. Can be the provider name or a GUID value.\n"
+        L"  [TraceName|ExtendedData|Capture]\n"
+        L"                            Optional. Supported only if [ProviderName|GUID] is provided.\n"
+        L"                            - If <Enum>: Can be ExtendedData or Capture.\n"
+        L"                               - If <ExtendedData>: Returns event schema for Manifest providers.\n"
+        L"                               - If <Capture>: Creates an event trace session off of the providers returned during enumeration.\n"
+        L"                            -If <Capture>: TraceName specifies the name of the trace session created.\n"
+        L"  [Keywords (Hex)]          - Optional. Supported only if <Capture> is specified. Holds the keywords for capture.\n\n"
+        L"Examples:\n"
+        L"  EtwInspector.exe Enum All\n"
+        L"  EtwInspector.exe Enum Manfiest DotNet ExtendedData\n"
+        L"  EtwInspector.exe Enum Manfiest DotNet Capture\n"
+        L"  EtwInspector.exe Capture Microsoft-Windows-DotNETRuntime MyTrace\n"
+        L"  EtwInspector.exe Capture Microsoft-Windows-DotNETRuntime MyTrace 0x8\n");
 }
 
 //
@@ -156,6 +172,9 @@ NTSTATUS EnumerateProviders(
     WCHAR StringGuid[MAX_GUID_SIZE];
     std::wstring resourceFileName;
 
+    // lowering the case of ProviderName
+    std::transform(ProviderName.begin(), ProviderName.end(), ProviderName.begin(), ::tolower);
+
     // Leveraging the TdhEnumerateProviders API to enumerate the providers
     status = TdhEnumerateProviders(penum, &BufferSize);
     while (ERROR_INSUFFICIENT_BUFFER == status)
@@ -183,7 +202,9 @@ NTSTATUS EnumerateProviders(
     for (DWORD i = 0; i < penum->NumberOfProviders; i++)
     {
         std::wstring providerNameFromOffset = std::wstring((LPWSTR)((PBYTE)(penum)+penum->TraceProviderInfoArray[i].ProviderNameOffset));
-
+        std::wstring lowerproviderNameFromOffset = providerNameFromOffset;
+        std::transform(lowerproviderNameFromOffset.begin(), lowerproviderNameFromOffset.end(), lowerproviderNameFromOffset.begin(), ::tolower);
+        
         HRESULT hr = StringFromGUID2(
             penum->TraceProviderInfoArray[i].ProviderGuid,
             StringGuid,
@@ -195,13 +216,15 @@ NTSTATUS EnumerateProviders(
             status = hr;
             goto Exit;
         }
+        std::wstring lowerStringGUID = StringGuid;
+        std::transform(lowerStringGUID.begin(), lowerStringGUID.end(), lowerStringGUID.begin(), ::tolower);
 
-        bool match = ProviderName == providerNameFromOffset || ProviderName == StringGuid || providerNameFromOffset.find(ProviderName) != std::wstring::npos;
-        if (Option == L"Capture" && match)
+        bool match = ProviderName == lowerproviderNameFromOffset || ProviderName == lowerStringGUID || lowerproviderNameFromOffset.find(ProviderName) != std::wstring::npos;
+        if (Option == L"capture" && match)
         {
             ProviderGuids.push_back(StringGuid);
         }
-        else if (Option == L"Manifest" && penum->TraceProviderInfoArray[i].SchemaSource == 0 && match)
+        else if (Option == L"manifest" && penum->TraceProviderInfoArray[i].SchemaSource == 0 && match)
         {
             status = GetResourceFile(
                 StringGuid,
@@ -218,7 +241,7 @@ NTSTATUS EnumerateProviders(
 
             ProviderGuids.push_back(StringGuid);
         }
-        else if (Option == L"MOF" && penum->TraceProviderInfoArray[i].SchemaSource == 1 && match)
+        else if (Option == L"mof" && penum->TraceProviderInfoArray[i].SchemaSource == 1 && match)
         {
             ProviderGuids.push_back(StringGuid);
 
@@ -230,7 +253,7 @@ NTSTATUS EnumerateProviders(
                 L"N/A"
             );
         }
-        else if ((Option == L"All" || Option == L"ALL") && match)
+        else if ((Option == L"all") && match)
         {
             if (penum->TraceProviderInfoArray[i].SchemaSource == 0) {
 
@@ -266,16 +289,16 @@ Exit:
 // Function to get the resource file for a provider
 //
 NTSTATUS GetResourceFile(
-    _In_ std::wstring providerGuid,
-    _Out_ std::wstring& resourceFileName
+    _In_ std::wstring ProviderGuid,
+    _Out_ std::wstring& ResourceFileName
 )
 {
     NTSTATUS status = ERROR_SUCCESS;
-    resourceFileName = L"";
+    ResourceFileName = L"";
     DWORD dwSize;
     HKEY hKey = NULL;
     WCHAR szResourceFileName[MAX_PATH] = { 0 };
-    std::wstring fullKey = L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\WINEVT\\Publishers\\" + providerGuid;
+    std::wstring fullKey = L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\WINEVT\\Publishers\\" + ProviderGuid;
 
     if (fullKey.length() > MAX_PATH)
     {
@@ -306,7 +329,7 @@ NTSTATUS GetResourceFile(
     );
     if (status == ERROR_SUCCESS);
     {
-        resourceFileName = szResourceFileName;
+        ResourceFileName = szResourceFileName;
     }
     
 Exit:
@@ -321,13 +344,13 @@ Exit:
 // Function that enumerates the events for a provider
 //
 NTSTATUS EnumerateProviderEvents(
-    _In_ std::wstring provider
+    _In_ std::wstring Provider
 )
 {
     GUID providerGuid;
     ULONG bufferSize = 0;
     TDHSTATUS status = CLSIDFromString(
-        provider.c_str(),
+        Provider.c_str(),
         &providerGuid
     );
     if (FAILED(status))
@@ -413,7 +436,13 @@ NTSTATUS GetEventMetadata(
     _In_ const TRACE_EVENT_INFO* pEventInfo
 )
 {
-    wprintf(L"Event Name: %s\n", (pEventInfo->EventNameOffset != 0) ? (PWCHAR)((PBYTE)pEventInfo + pEventInfo->EventNameOffset) : L"(not available)");
+    if (pEventInfo->EventNameOffset != 0)
+    {
+        wprintf(L"Event Name: %s\n", (PWCHAR)((PBYTE)pEventInfo + pEventInfo->EventNameOffset));
+    }
+    else {
+        wprintf(L"Event Name: EventID_%u\n", pEventInfo->EventDescriptor.Id);
+    }
     wprintf(L"Event ID: %u\n", pEventInfo->EventDescriptor.Id);
     wprintf(L"Event Version: %u\n", pEventInfo->EventDescriptor.Version);
     wprintf(L"Event Channel: %u\n", pEventInfo->EventDescriptor.Channel);
@@ -440,21 +469,21 @@ NTSTATUS GetEventMetadata(
 //
 VOID PrintInformation(
     _In_ DWORD Type,
-    _In_ std::wstring providerName,
-    _In_ std::wstring providerGuid,
-    _In_ std::wstring source,
-    _In_ std::wstring resourceFileName
+    _In_ std::wstring ProviderName,
+    _In_ std::wstring ProviderGuid,
+    _In_ std::wstring Source,
+    _In_ std::wstring ResourceFileName
 )
 {
-    wprintf(L"\nProvider Name: %s\n", providerName.c_str());
-    wprintf(L"Provider GUID: %s\n", providerGuid.c_str());
-    wprintf(L"Source: %s\n", source.c_str());
-    wprintf(L"Resource File Name: %s\n", resourceFileName.c_str());
+    wprintf(L"\nProvider Name: %s\n", ProviderName.c_str());
+    wprintf(L"Provider GUID: %s\n", ProviderGuid.c_str());
+    wprintf(L"Source: %s\n", Source.c_str());
+    wprintf(L"Resource File Name: %s\n", ResourceFileName.c_str());
 
-    if (Type == 1 && source == L"Manifest")
+    if (Type == 1 && Source == L"Manifest")
     {
         EnumerateProviderEvents(
-            providerGuid
+            ProviderGuid
         );
     }
 }
