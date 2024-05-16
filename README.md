@@ -2,7 +2,22 @@
 An Event Tracing for Windows (ETW) tool that allows you to enumerate Manifest & MOF providers, as well as collect events from desired providers. 
 
 # Examples
-`EtwInspector.exe <Enum|Capture> <Options> [ProviderName] [TraceName|Keywords|ExtendedData|Capture]`
+```
+Usage: EtwInspector.exe <Enum|Capture> <Options> [ProviderName|GUID] [TraceName|ExtendedData|Capture] [Keywords]
+
+Arguments:
+  <Enum|Capture>            Required. Specifies the mode of operation.
+                            - Enum: Enumerates providers.
+                            - Capture: Capture specified providers.
+  <Options>                 Required when specifying Enum. Can be Manifest, MOF, or All.
+  [ProviderName|GUID]       Optional for Enum. Required for Capture. Can be the provider name or a GUID value.
+  [TraceName|ExtendedData|Capture]
+                            Optional. Supported only if [ProviderName|GUID] is provided.
+                            - If <Enum>: Can be ExtendedData or Capture.
+                               - If <ExtendedData>: Returns event schema for Manifest providers.
+                               - If <Capture>: Creates an event trace session off of the providers returned during enumeration.
+                            -If <Capture>: TraceName specifies the name of the trace session created.
+  [Keywords (Hex)]          - Optional. Supported only if <Capture> is specified. Holds the keywords for capture.
 
 ### Enumeration
 Enumerates both MOF & Manifest providers and prints the output to screen. 
