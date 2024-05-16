@@ -69,14 +69,21 @@ int wmain(
     }
     else if (action == L"capture")
     {
-        if (argc < 5) {
+        if (argc < 4) {
             PrintUsage();
             return 1;
         }
 
         providerName = argv[2];
         traceName = argv[3];
-        keywords = _wcstoui64(argv[4], NULL, 16);
+        if (argc == 5)
+        {
+            keywords = _wcstoui64(argv[4], NULL, 16);
+        }
+        else
+        {
+            keywords = 0xFFFFFFFFFFFFFFFF;
+        }
         std::vector<std::wstring> providerGuids;
 
         wprintf(L"Capturing trace for provider %s with trace name %s and keywords 0x%llX\n", providerName.c_str(), traceName.c_str(), keywords);

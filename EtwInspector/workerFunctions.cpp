@@ -22,8 +22,8 @@ VOID PrintUsage(
         L"  [Keywords (Hex)]          - Optional. Supported only if <Capture> is specified. Holds the keywords for capture.\n\n"
         L"Examples:\n"
         L"  EtwInspector.exe Enum All\n"
-        L"  EtwInspector.exe Enum Manfiest DotNet ExtendedData\n"
-        L"  EtwInspector.exe Enum Manfiest DotNet Capture\n"
+        L"  EtwInspector.exe Enum Manifest DotNet ExtendedData\n"
+        L"  EtwInspector.exe Enum Manifest DotNet Capture\n"
         L"  EtwInspector.exe Capture Microsoft-Windows-DotNETRuntime MyTrace\n"
         L"  EtwInspector.exe Capture Microsoft-Windows-DotNETRuntime MyTrace 0x8\n");
 }

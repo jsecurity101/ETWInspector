@@ -18,6 +18,13 @@ Arguments:
                                - If <Capture>: Creates an event trace session off of the providers returned during enumeration.
                             -If <Capture>: TraceName specifies the name of the trace session created.
   [Keywords (Hex)]          - Optional. Supported only if <Capture> is specified. Holds the keywords for capture.
+
+Examples:
+  EtwInspector.exe Enum All
+  EtwInspector.exe Enum Manifest DotNet ExtendedData
+  EtwInspector.exe Enum Manifest DotNet Capture
+  EtwInspector.exe Capture Microsoft-Windows-DotNETRuntime MyTrace
+  EtwInspector.exe Capture Microsoft-Windows-DotNETRuntime MyTrace 0x8
 ```
 
 ### Enumeration
@@ -166,3 +173,5 @@ Type 'exit' to stop tracing and exit.
 - [ ] Add support for the enumeration of active trace sessions
 - [ ] Add support for enumeration of providers based off of event values
 - [ ] Add support to return the ETW provider's binary
+
+
