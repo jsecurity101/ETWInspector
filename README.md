@@ -174,4 +174,11 @@ Type 'exit' to stop tracing and exit.
 - [ ] Add support for enumeration of providers based off of event values
 - [ ] Add support to return the ETW provider's binary
 
+# Feedback
+If there are any features you would like to see, please don't hesitate to reach out. 
+
+Thank you to the following people who were willing to test this tool and provide feedback: 
+- Olaf Hartong
+- Matt Graeber
+
 
