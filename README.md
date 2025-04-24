@@ -121,7 +121,6 @@ Thank you to the following people who were willing to test this tool and provide
 ## Release Notes
 
 v1.0.0
--------
 * Initial release of package
 * Following Cmdlets: 
     * Get-EtwProviders 
