@@ -5,12 +5,14 @@ Developed in C#, EtwInspector is easily accessible as a PowerShell module, makin
 
 ## Instructions
 ### PowerShell Gallery
+Coming soon...
 
 ### Import Directly
 1. Import EtwInspector via: 
 ```
 PS > Import-Module EtwInspector.psd1
 ```
+You may need to go to the file and press "unblock" if you get an error about importing the module and its depedencies. 
 
 2. Get a list of available commands within the module: 
 ```
