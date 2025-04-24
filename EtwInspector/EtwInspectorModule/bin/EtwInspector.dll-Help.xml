@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml" xmlns="http://msh">
+  <!-- Cmdlet: Start-EtwCapture -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Start-EtwCapture</command:name>
+      <command:verb>Start</command:verb>
+      <command:noun>EtwCapture</command:noun>
+      <maml:description>
+        <maml:para>Start-EtwCapture creates a trace session</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Start-EtwCapture creates a trace session</maml:para>
+    </maml:description>
+    <command:syntax>
+      <!-- Parameter set: __AllParameterSets -->
+      <command:syntaxItem>
+        <maml:name>Start-EtwCapture</maml:name>
+        <!-- Parameter: ProviderGuids -->
+        <command:parameter required="true" globbing="false" pipelineInput="true (ByValue)" position="0">
+          <maml:name>ProviderGuids</maml:name>
+          <command:parameterValue required="true">string[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: OutputFilePath -->
+        <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>OutputFilePath</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: TraceName -->
+        <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>TraceName</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: Keywords -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Keywords</maml:name>
+          <command:parameterValue required="true">ulong</command:parameterValue>
+          <dev:type>
+            <maml:name>System.UInt64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>18446744073709551615</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <!-- Parameter: ProviderGuids -->
+      <command:parameter required="true" globbing="false" pipelineInput="true (ByValue)" position="0">
+        <maml:name>ProviderGuids</maml:name>
+        <command:parameterValue required="true">string[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: TraceName -->
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>TraceName</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: OutputFilePath -->
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>OutputFilePath</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: Keywords -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Keywords</maml:name>
+        <command:parameterValue required="true">ulong</command:parameterValue>
+        <dev:type>
+          <maml:name>System.UInt64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>18446744073709551615</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <!-- OutputType: TraceEventSession -->
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Microsoft.Diagnostics.Tracing.Session.TraceEventSession</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>----------  EXAMPLE 1  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>PS C:\&gt; $TraceSession = Start-EtwCapture -ProviderGuids "70EB4F03-C1DE-4F73-A051-33D13D5413BD" -TraceName EtwTest -OutputFilePath c:\etwcapture.xml</maml:para>
+        </maml:introduction>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- Cmdlet: Stop-EtwCapture -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Stop-EtwCapture</command:name>
+      <command:verb>Stop</command:verb>
+      <command:noun>EtwCapture</command:noun>
+      <maml:description>
+        <maml:para>Stop-EtwCapture stops a trace session</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Stop-EtwCapture stops a trace session</maml:para>
+    </maml:description>
+    <command:syntax>
+      <!-- Parameter set: __AllParameterSets -->
+      <command:syntaxItem>
+        <maml:name>Stop-EtwCapture</maml:name>
+        <!-- Parameter: Session -->
+        <command:parameter required="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+          <maml:name>Session</maml:name>
+          <command:parameterValue required="true">TraceEventSession</command:parameterValue>
+          <dev:type>
+            <maml:name>Microsoft.Diagnostics.Tracing.Session.TraceEventSession</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: TraceName -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>TraceName</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <!-- Parameter: Session -->
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+        <maml:name>Session</maml:name>
+        <command:parameterValue required="true">TraceEventSession</command:parameterValue>
+        <dev:type>
+          <maml:name>Microsoft.Diagnostics.Tracing.Session.TraceEventSession</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: TraceName -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>TraceName</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>Microsoft.Diagnostics.Tracing.Session.TraceEventSession</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues />
+    <command:examples>
+      <command:example>
+        <maml:title>----------  EXAMPLE 1  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>PS C:\&gt; $TraceSession | Stop-EtwCapture</maml:para>
+        </maml:introduction>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 2  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>PS C:\&gt; Stop-EtwCapture -TraceName EtwTest</maml:para>
+        </maml:introduction>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- Cmdlet: Get-EtwProviders -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Get-EtwProviders</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>EtwProviders</command:noun>
+      <maml:description>
+        <maml:para>Get-EtwProviders enumerates ETW Providers.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Get-EtwProviders enumerates ETW Providers. It can enumerate standard providers (Manifest or MOF) and TraceLogging providers.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <!-- Parameter set: __AllParameterSets -->
+      <command:syntaxItem>
+        <maml:name>Get-EtwProviders</maml:name>
+        <!-- Parameter: FilePath -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>FilePath</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: PropertyString -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>PropertyString</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: ProviderGUID -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ProviderGUID</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: ProviderName -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ProviderName</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: ProviderType -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ProviderType</maml:name>
+          <command:parameterValue required="true">string[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>MOF, Manifest</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SearchType -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SearchType</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>FullStringSearch</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <!-- Parameter: ProviderName -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ProviderName</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: ProviderGUID -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ProviderGUID</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: ProviderType -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ProviderType</maml:name>
+        <command:parameterValue required="true">string[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>MOF, Manifest</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: FilePath -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>FilePath</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: PropertyString -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>PropertyString</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: SearchType -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SearchType</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>FullStringSearch</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <command:examples>
+      <command:example>
+        <maml:title>----------  EXAMPLE 1  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>PS C:\&gt; Get-EtwProviders -ProviderType MOF</maml:para>
+        </maml:introduction>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 2  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>PS C:\&gt; Get-EtwProviders -ProviderType Manifest, MOF -ProviderName Kerberos</maml:para>
+        </maml:introduction>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 3  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>PS C:\&gt; Get-EtwProviders -ProviderType Manifest, MOF, TraceLogging -ProviderName Kerberos -FilePath C:\Windows\System32\kerberos.dll</maml:para>
+        </maml:introduction>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- Cmdlet: Get-EtwSecurityDescriptor -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Get-EtwSecurityDescriptor</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>EtwSecurityDescriptor</command:noun>
+      <maml:description>
+        <maml:para>Get-EtwSecurityDescriptor enumerates an ETW security descriptor.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Get-EtwSecurityDescriptor enumerates an ETW security descriptor. Right now, this is only supported for Manifest-based providers.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <!-- Parameter set: __AllParameterSets -->
+      <command:syntaxItem>
+        <maml:name>Get-EtwSecurityDescriptor</maml:name>
+        <!-- Parameter: Guid -->
+        <command:parameter required="true" globbing="false" pipelineInput="true (ByValue)" position="named">
+          <maml:name>Guid</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <!-- Parameter: Guid -->
+      <command:parameter required="true" globbing="false" pipelineInput="true (ByValue)" position="named">
+        <maml:name>Guid</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues />
+    <command:examples>
+      <command:example>
+        <maml:title>----------  EXAMPLE 1  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>PS C:\&gt; Get-EtwSecurityDescriptor -Guid "54849625-5478-4994-a5ba-3e3b0328c30d"</maml:para>
+        </maml:introduction>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 2  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>PS C:\&gt; Get-EtwSecurityDescriptor -Guid $result.RegisteredProviders.providerGuid</maml:para>
+        </maml:introduction>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- Cmdlet: Get-EtwTraceSessions -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Get-EtwTraceSessions</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>EtwTraceSessions</command:noun>
+      <maml:description>
+        <maml:para>Get-EtwTraceSessions enumerates ETW Trace Sessions</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Get-EtwTraceSessions enumerates ETW Trace Sessions and Data Collectors that have Trace Sessions.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <!-- Parameter set: __AllParameterSets -->
+      <command:syntaxItem>
+        <maml:name>Get-EtwTraceSessions</maml:name>
+        <!-- Parameter: Host -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Host</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: Namespace -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Namespace</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>All</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: ProviderGuid -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ProviderGuid</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: ProviderName -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ProviderName</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: SessionName -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SessionName</maml:name>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <!-- Parameter: SessionName -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SessionName</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: ProviderName -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ProviderName</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: ProviderGuid -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ProviderGuid</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: Namespace -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Namespace</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>All</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: Host -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Host</maml:name>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <command:examples>
+      <command:example>
+        <maml:title>----------  EXAMPLE 1  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>PS C:\&gt; Get-EtwProviders</maml:para>
+        </maml:introduction>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 2  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>PS C:\&gt; Get-EtwTraceSessions -Namespace Session -SessionName TestSession</maml:para>
+        </maml:introduction>
+      </command:example>
+      <command:example>
+        <maml:title>----------  EXAMPLE 3  ----------</maml:title>
+        <maml:introduction>
+          <maml:para>PS C:\&gt;$Sessions = Get-EtwTraceSessions -ProviderGuid "70EB4F03-C1DE-4F73-A051-33D13D5413BD"</maml:para>
+        </maml:introduction>
+      </command:example>
+    </command:examples>
+  </command:command>
+</helpItems>
